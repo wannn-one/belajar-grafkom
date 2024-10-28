@@ -32,7 +32,7 @@ int main() {
         return -1;
     }
 
-    Colormap cmap = XCreateColormap(display, root, vi->visual, AllocNone);
+    Colormap cmap = XCreateColormap(display, root, vi->visual, AllocNone); 
     XSetWindowAttributes swa;
     swa.colormap = cmap;
     swa.event_mask = ExposureMask | KeyPressMask;
@@ -43,16 +43,15 @@ int main() {
     GLXContext glc = glXCreateContext(display, vi, NULL, GL_TRUE);
     glXMakeCurrent(display, win, glc);
 
-    // Setup viewport dan warna latar belakang
-    glClearColor(0.0, 0.0, 0.0, 1.0);
-    glViewport(0, 0, 800, 600);
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Warna background
+    glViewport(0, 0, 800, 600); // Ukuran window
 
     while (true) {
         XEvent xev;
         XNextEvent(display, &xev);
         if (xev.type == Expose) {
             glClear(GL_COLOR_BUFFER_BIT);
-            drawTriangle(); // Panggil fungsi untuk menggambar segitiga
+            drawTriangle();
             glXSwapBuffers(display, win);
         } else if (xev.type == KeyPress) {
             break;
